@@ -754,9 +754,8 @@ class GcodeMachine:
                 position[axis_1] = center_axis1 + r_axis1;
                 position[axis_linear] += linear_per_segment;
 
-                gcodeline = ""
-                if i == 1:
-                    gcodeline += "G1"
+                gcodeline = "G1"
+                
                     
                 for a in range(0,3):
                     if position[a] != position_last[a]: # only write changes
@@ -807,9 +806,7 @@ class GcodeMachine:
         
         for k in range(0, num_fractions):
             # render segments
-            txt = ""
-            if k == 0:
-                txt += "G1"
+            txt = "G1"
                 
             for i in range(0, 3):
                 # loop over X, Y, Z axes

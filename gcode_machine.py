@@ -758,11 +758,10 @@ class GcodeMachine:
                 
                     
                 for a in range(0,3):
-                    if position[a] != position_last[a]: # only write changes
-                        txt = "{}{:0.3f}".format(words[a], position[a])
-                        txt = txt.rstrip("0").rstrip(".")
-                        gcodeline += txt
-                        position_last[a] = position[a]
+                    txt = "{}{:0.3f}".format(words[a], position[a])
+                    txt = txt.rstrip("0").rstrip(".")
+                    gcodeline += txt
+                    position_last[a] = position[a]
                         
                 if i == 1:
                     if self.contains_feed: gcodeline += "F{:.1f}".format(self.feed_in_current_line)
@@ -815,10 +814,8 @@ class GcodeMachine:
                 if self.current_distance_mode == "G90":
                     # absolute distances
                     coord_abs = self.pos_w[i] + coord_rel
-                    if coord_rel != 0:
-                        # only output for changes
-                        txt += "{}{:0.3f}".format(self._axes_words[i], coord_abs)
-                        txt = txt.rstrip("0").rstrip(".")
+                    txt += "{}{:0.3f}".format(self._axes_words[i], coord_abs)
+                    txt = txt.rstrip("0").rstrip(".")
                 else:
                     # relative distances
                     txt += "{}{:0.3f}".format(self._axes_words[i], segment_length)

@@ -772,9 +772,8 @@ class GcodeMachine:
             
         
         # make sure we arrive at target
-        gcodeline = ""
-        if segments <= 1:
-            gcodeline += "G1"
+        gcodeline = "G1"
+        
         
         for a in range(0,3):
             if target[a] != position[a]:

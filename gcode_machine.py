@@ -776,10 +776,9 @@ class GcodeMachine:
         
         
         for a in range(0,3):
-            if target[a] != position[a]:
-                txt = "{}{:0.3f}".format(words[a], target[a])
-                txt = txt.rstrip("0").rstrip(".")
-                gcodeline += txt
+            txt = "{}{:0.3f}".format(words[a], target[a])
+            txt = txt.rstrip("0").rstrip(".")
+            gcodeline += txt
            
         if segments <= 1:
             # no segments were rendered (very small arc) so we have to put S and F here

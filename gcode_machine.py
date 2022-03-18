@@ -47,6 +47,8 @@ class GcodeMachine:
         """
         
         self.logger = logging.getLogger('gerbil')
+
+        self.z_corection_callback = None
         
         
         ## @var line
@@ -456,7 +458,19 @@ class GcodeMachine:
         self.dist = math.sqrt(self.dist_xyz[0] * self.dist_xyz[0] + self.dist_xyz[1] * self.dist_xyz[1] + self.dist_xyz[2] * self.dist_xyz[2])
         
         
-    
+    def z_corrected_line(self):
+        if self.z_corection_callback ==None:
+            return self.line
+        if not(self.current_motion_mode  in [0,1,2,3]):
+            return self.line
+        z_correction_val = self.z_corection_callback(self.target_m)
+        regexp = re.compile(r"Z([-.\d]+)")
+        
+        corrected_line = re.sub(regexp, "", self.line).strip()
+        corrected_line += "Z{:.3f}".format(z_correction_val)
+        return corrected_line
+
+
     
     def fractionize(self):
         """

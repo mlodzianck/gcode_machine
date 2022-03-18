@@ -847,4 +847,5 @@ class GcodeMachine:
 
 
     def _default_callback(self, status, *args):
-        print("PREPROCESSOR DEFAULT CALLBACK", status, args)
+        pass
+#         print("PREPROCESSOR DEFAULT CALLBACK", status, args)

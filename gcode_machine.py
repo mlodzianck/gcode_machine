@@ -459,6 +459,9 @@ class GcodeMachine:
         
         
     def z_corrected_line(self):
+        m = re.match(self._re_motion_mode, self.line)
+        if not m: 
+            return self.line
         if self.z_corection_callback ==None:
             return self.line
         if not(self.current_motion_mode  in [0,1,2,3]):
